@@ -24,7 +24,7 @@
         </thead>
         @foreach($entries as $entry)
             <tr>
-                <td>{{ $entry->nome }}</td>
+                <td><a href="{{ route('admin.evento.show', [$entry->id]) }}">{{ $entry->nome }}</a></td>
                 <td>{{ $entry->data_inicial->format('d/m/Y') }}</td>
                 <td>{{ $entry->ingressos->count() }}/{{ $entry->lotacao_maxima }}</td>
                 <td>{{ $entry->tipo }}</td>

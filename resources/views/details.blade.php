@@ -15,7 +15,7 @@
         </div>
         <div class="col-sm-8">
             <h2 class="media-heading">{{ $evento->nome }}</h2>
-            <p>{{ $evento->descricao }}</p>
+            <p>{!! nl2br($evento->descricao) !!}</p>
             <dl>
                 <dt>Data</dt>
                 <dd>{{ $evento->data_inicial->format('d/m/Y') }}</dd>
