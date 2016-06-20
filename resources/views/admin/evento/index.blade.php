@@ -33,11 +33,11 @@
                 <td width="1%" nowrap>
                     @if (!$entry->publicado)
                     <a href="{{ route('admin.evento.publish', [$entry->id]) }}" class="btn btn-success btn-sm" title="Publicar">
-                        <span class="glyphicon glyphicon-ok"></span>
+                        <span class="glyphicon glyphicon-unchecked"></span>
                     </a>
                     @else
                     <a href="{{ route('admin.evento.unpublish', [$entry->id]) }}" class="btn btn-success btn-sm" title="Despublicar">
-                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-check"></span>
                     </a>
                     @endif
                     <a href="{{ route('admin.evento.edit', [$entry->id]) }}" class="btn btn-info btn-sm" title="Show details">

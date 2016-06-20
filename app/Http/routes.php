@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin'], function()
 
     Route::resource('organizador', 'OrganizadorController');
 
-    Route::put('evento/{id}/publish', ['as' => 'admin.evento.publish', 'uses' => 'EventoController@publish']);
-    Route::put('evento/{id}/unpublish', ['as' => 'admin.evento.unpublish', 'uses' => 'EventoController@unpublish']);
+    Route::get('evento/{id}/publish', ['as' => 'admin.evento.publish', 'uses' => 'EventoController@publish']);
+    Route::get('evento/{id}/unpublish', ['as' => 'admin.evento.unpublish', 'uses' => 'EventoController@unpublish']);
     Route::resource('evento', 'EventoController');
 });

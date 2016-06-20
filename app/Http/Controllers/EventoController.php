@@ -153,6 +153,23 @@ class EventoController extends Controller
         {
             abort(404, 'Registro não encontrado.');
         }
+
+        try
+        {
+            if (Carbon::now()->setTime(0,0,0)->timestamp > $entry->data_inicial->setTime(0,0,0)->timestamp)
+            {
+                throw new \Exception('O evento não pode ser publicado após a data de realização');
+            }
+
+            $entry->publicado = true;
+            $entry->save();
+
+            return redirect()->route('admin.evento.index')->with('success', 'O evento foi publicado.');
+        }
+        catch (\Exception $e)
+        {
+            return redirect()->route('admin.evento.index')->with('error', $e->getMessage());
+        }
     }
 
     public function unpublish($id)
@@ -163,5 +180,10 @@ class EventoController extends Controller
         {
             abort(404, 'Registro não encontrado.');
         }
+
+        $entry->publicado = false;
+        $entry->save();
+
+        return redirect()->route('admin.evento.index')->with('success', 'O evento foi despublicado.');
     }
 }
