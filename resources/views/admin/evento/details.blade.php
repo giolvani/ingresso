@@ -10,6 +10,12 @@
 
     @include('partials.alerts')
 
+    @if (!$delete_view && $entry->publicado)
+        <div class="alert alert-warning">
+            <strong>Atualização automática!</strong> Esta página é recarregada a cada <span id="timer"></span> segundos.
+        </div>
+    @endif
+
     @if ($delete_view)
         <form action="{{ route('admin.evento.destroy', [$entry->id]) }}" method="POST" role="form">
             {{ method_field('DELETE') }}
@@ -67,5 +73,35 @@
                 </tr>
             @endforeach
         </table>
+    @endif
+@stop
+
+@section('scripts')
+    @if (!$delete_view && $entry->publicado)
+        <script>
+            function startTimer(duration, display, callback) {
+                var timer = duration, minutes, seconds;
+                setInterval(function () {
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    display.text(minutes + ":" + seconds);
+
+                    if (--timer < 0) {
+                        callback();
+                        timer = duration;
+                    }
+                }, 1000);
+            }
+
+            $(function ($) {
+                startTimer(30, $('#timer'), function(){
+                    location.reload();
+                });
+            });
+        </script>
     @endif
 @stop

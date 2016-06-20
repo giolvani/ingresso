@@ -10,5 +10,5 @@ elixir(function(mix) {
 
     mix.copy('node_modules/bootstrap/fonts', 'public/fonts');
 
-    mix.version(['css/home.css']);
+    mix.version(['css/home.css', 'js/home.js']);
 });

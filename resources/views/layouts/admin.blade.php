@@ -32,7 +32,8 @@
     <div class="container">
         @yield('content')
     </div>
-</body>
 
-@yield('scripts')
+    <script src="{{ elixir('js/home.js') }}"></script>
+    @yield('scripts')
+</body>
 </html>

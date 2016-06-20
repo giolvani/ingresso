@@ -10,6 +10,32 @@
 
     @include('partials.alerts')
 
+    <form class="form-inline well" action="{{ route('admin.evento.index') }}">
+        <p><strong>Buscar</strong></p>
+        <div class="form-group">
+            <label class="sr-only">Nome</label>
+            <input type="text" class="form-control" name="nome" value="{{ Request::get('nome') }}" placeholder="Nome">
+        </div>
+        <div class="form-group">
+            <label class="sr-only">Data</label>
+            <input type="text" class="form-control" name="data" value="{{ Request::get('data') }}" placeholder="Data do evento">
+        </div>
+        <div class="form-group">
+            <label class="sr-only">Organizador</label>
+            <input type="text" class="form-control" name="organizador" value="{{ Request::get('organizador') }}" placeholder="Organizador">
+        </div>
+        <div class="checkbox">
+            <select class="form-control" name="publicado">
+                <optgroup label="Publicado">
+                    <option value="">Todos</option>
+                    <option value="s" {{ Request::get('publicado') == 's' ? 'selected="selected"' : null }}>Sim</option>
+                    <option value="n" {{ Request::get('publicado') == 'n' ? 'selected="selected"' : null }}>Não</option>
+                </optgroup>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+    </form>
+
     <table class="table table-striped table-hover">
         <thead>
             <tr>

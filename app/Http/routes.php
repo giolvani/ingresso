@@ -1,5 +1,10 @@
 <?php
 
+/*DB::enableQueryLog();
+DB::listen(function($sql){
+    print_r($sql);
+});*/
+
 Route::get('/', 'HomeController@listarEventos');
 
 Route::get('/evento/{id}', ['uses' => 'HomeController@verEvento', 'as' => 'ver_evento']);

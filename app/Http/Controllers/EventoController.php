@@ -11,12 +11,29 @@ use App\Http\Requests;
 
 class EventoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $entries = Evento::query()
-            ->orderBy('data_inicial', 'desc')
+        $entries = Evento::query();
+
+        if (!empty($request->get('nome')))
+        {
+            $entries = $entries->where('nome', 'like', '%'.$request->get('nome').'%');
+        }
+
+        if (!empty($request->get('data')))
+        {
+            $entries = $entries->where('data_inicial', Carbon::createFromFormat('d/m/Y', $request->get('data'))->setTime(0,0,0));
+        }
+
+        if (!empty($request->get('publicado')))
+        {
+            $entries = $entries->where('publicado', $request->get('publicado') == 's' ? true : false);
+        }
+
+        $entries = $entries->orderBy('data_inicial', 'desc')
             ->orderBy('nome', 'asc')
             ->get();
+
         return view('admin.evento.index', ['entries' => $entries]);
     }
 
@@ -46,8 +63,8 @@ class EventoController extends Controller
             Evento::create([
                 'organizador_id' => $request->get('organizador_id'),
                 'nome' => $request->get('nome'),
-                'data_inicial' => Carbon::createFromFormat('d/m/Y', $request->get('data_inicial')),
-                'data_final' => Carbon::createFromFormat('d/m/Y', $request->get('data_final')),
+                'data_inicial' => Carbon::createFromFormat('d/m/Y', $request->get('data_inicial'))->setTime(0,0,0),
+                'data_final' => Carbon::createFromFormat('d/m/Y', $request->get('data_final'))->setTime(0,0,0),
                 'descricao' => $request->get('descricao'),
                 'lotacao_maxima' => $request->get('lotacao_maxima'),
                 'tipo' => $request->get('tipo'),
@@ -108,8 +125,8 @@ class EventoController extends Controller
             $entry->update([
                 'organizador_id' => $request->get('organizador_id'),
                 'nome' => $request->get('nome'),
-                'data_inicial' => Carbon::createFromFormat('d/m/Y', $request->get('data_inicial')),
-                'data_final' => Carbon::createFromFormat('d/m/Y', $request->get('data_final')),
+                'data_inicial' => Carbon::createFromFormat('d/m/Y', $request->get('data_inicial'))->setTime(0,0,0),
+                'data_final' => Carbon::createFromFormat('d/m/Y', $request->get('data_final'))->setTime(0,0,0),
                 'descricao' => $request->get('descricao'),
                 'lotacao_maxima' => $request->get('lotacao_maxima'),
                 'tipo' => $request->get('tipo')
