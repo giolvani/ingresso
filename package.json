@@ -10,7 +10,7 @@
     "bootstrap-sass": "^3.0.0"
   },
   "dependencies": {
-    "bootstrap": "^3.3.6",
-    "jquery": "^2.2.4"
+    "bootstrap": "^3.3.7",
+    "jquery": "3.3.1"
   }
 }
